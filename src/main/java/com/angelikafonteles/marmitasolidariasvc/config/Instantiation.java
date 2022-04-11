@@ -31,11 +31,11 @@ public class Instantiation implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		
-		restauranteRepository.deleteAll();
-		enderecoRepository.deleteAll();
-		marmitaRepository.deleteAll();
-		
-		obterMock();
+//		restauranteRepository.deleteAll();
+//		enderecoRepository.deleteAll();
+//		marmitaRepository.deleteAll();
+//		
+//		obterMock();
 		
 	}	
 	

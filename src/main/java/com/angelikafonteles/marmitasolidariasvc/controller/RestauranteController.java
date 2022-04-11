@@ -42,10 +42,10 @@ public class RestauranteController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)//, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> insert(@RequestBody RestauranteInsertDTO objDto){
+	public ResponseEntity<String> insert(@RequestBody RestauranteInsertDTO objDto){
 		Restaurante obj = service.insert(objDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(obj.getId());
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)

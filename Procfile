@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prd $JAVA_OPTS -jar target/marmita-solidaria-svc-1.0.0.jar

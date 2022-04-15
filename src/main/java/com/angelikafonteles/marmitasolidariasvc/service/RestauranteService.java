@@ -11,6 +11,7 @@ import com.angelikafonteles.marmitasolidariasvc.dto.RestauranteInsertDTO;
 import com.angelikafonteles.marmitasolidariasvc.dto.RestauranteUpdateDTO;
 import com.angelikafonteles.marmitasolidariasvc.exceptions.ObjectNotFoundException;
 import com.angelikafonteles.marmitasolidariasvc.model.Endereco;
+import com.angelikafonteles.marmitasolidariasvc.model.Marmita;
 import com.angelikafonteles.marmitasolidariasvc.model.RequestWrapper;
 import com.angelikafonteles.marmitasolidariasvc.model.Restaurante;
 import com.angelikafonteles.marmitasolidariasvc.repositories.EnderecoRepository;
@@ -27,9 +28,9 @@ public class RestauranteService {
 	@Autowired
 	private RestauranteRepository repo;
 	@Autowired
-	private EnderecoRepository enderecoRepository;
-	@Autowired
 	private EnderecoService enderecoService;
+	@Autowired
+	private MarmitaService marmitaService;
 	
 	public List<Restaurante> findAll(){
 		return repo.findAll();
@@ -43,12 +44,22 @@ public class RestauranteService {
 	public Restaurante insert(RestauranteInsertDTO objDto) {
 		Restaurante restaurante = fromDTO(objDto);
 		Endereco endereco = restaurante.getEndereco();
-		endereco = enderecoRepository.insert(endereco);
+		endereco = enderecoService.insert(endereco);
 		restaurante.setEndereco(endereco);
 		return repo.insert(restaurante);
 	}
 	
+	public void save(Restaurante obj) {
+		repo.save(obj);
+	}
+	
 	public void delete(String id) {
+		
+		Restaurante restaurante = findById(id);
+		enderecoService.delete(restaurante.getEndereco().getId());
+		for (Marmita marmita : restaurante.getMarmitas()) {
+			marmitaService.delete(marmita.getId());
+		}
 		repo.deleteById(id);
 	}
 	

@@ -1,4 +1,4 @@
-package com.angelikafonteles.marmitasolidariasvc.model;
+package com.angelikafonteles.marmitasolidariasvc.dto;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,33 +8,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Document
-public class Marmita  implements Serializable {
+public class MarmitaDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
 
-	@Id
-	private String id;
-	private String restauranteId;
 	@JsonFormat(pattern=DATE_FORMAT)
 	private Date dataFeitura;
 	private String descricao;
 	private String observacao;
 	private Integer quantidade;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getRestauranteId() {
-		return restauranteId;
-	}
-	public void setRestauranteId(String restauranteId) {
-		this.restauranteId = restauranteId;
-	}
 	public Date getDataFeitura() {
 		return dataFeitura;
 	}

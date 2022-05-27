@@ -41,6 +41,17 @@ public class RestauranteService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 	
+	public Restaurante findByEmail(String email) {
+		List<Restaurante> list = repo.findByEmail(email);
+		if (list != null && !list.isEmpty()) {
+			Restaurante obj = list.get(0);
+			return obj;
+		}
+		else {
+			throw new ObjectNotFoundException("Objeto não encontrado");
+		}
+	}
+	
 	public Restaurante insert(RestauranteInsertDTO objDto) {
 		Restaurante restaurante = fromDTO(objDto);
 		Endereco endereco = restaurante.getEndereco();

@@ -41,6 +41,16 @@ public class RestauranteController {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/email/{email}", method = RequestMethod.GET)
+	public ResponseEntity<Restaurante> findByEmail(@PathVariable String email){
+		try {
+			Restaurante obj = service.findByEmail(email);			
+			return ResponseEntity.ok().body(obj);
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)//, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> insert(@RequestBody RestauranteInsertDTO objDto){
 		Restaurante obj = service.insert(objDto);
